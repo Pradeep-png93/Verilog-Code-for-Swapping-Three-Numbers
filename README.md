@@ -42,6 +42,8 @@ always @(*) begin
 end
 
 endmodule
+output:![image](https://github.com/user-attachments/assets/1a548bec-bf17-477b-bb96-8a3e30417d35)
+
 
 Testbench for Swapping Three Numbers:
 
@@ -70,7 +72,7 @@ module tb_swap_three_numbers;
     end
 
 endmodule
-output:![image](https://github.com/user-attachments/assets/1a548bec-bf17-477b-bb96-8a3e30417d35)
+output:![image](https://github.com/user-attachments/assets/0dc9cb11-0281-4ab2-b67a-56afee56ef0d)
 
 
 
