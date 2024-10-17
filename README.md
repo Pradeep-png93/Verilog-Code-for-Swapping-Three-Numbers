@@ -30,51 +30,76 @@ Capture the waveform output and include the results in your report for verificat
 
 Verilog Code:
 
-module swap_three_numbers(
-input [7:0] a, b, c,   
-output reg [7:0] a_out, b_out, c_out 
+// swap_three_numbers.v
+module swap_three_numbers (
+    input wire [7:0] a_in,
+    input wire [7:0] b_in,
+    input wire
+    [7:0] c_in,
+    output reg [7:0] a_out,
+    output reg [7:0] b_out,
+    output reg [7:0] c_out
 );
-
-always @(*) begin
-    a_out = b;   
-    b_out = c;   
-    c_out = a;   
-end
-
+    always @(*) begin
+        a_out = b_in; // Swap: a = b
+        b_out = c_in; // Swap: b = c
+        c_out = a_in; // Swap: c = a
+    end
 endmodule
-output:![image](https://github.com/user-attachments/assets/1a548bec-bf17-477b-bb96-8a3e30417d35)
+output:![image](https://github.com/user-attachments/assets/b1e4f811-6093-4bb4-9681-c34a74da537a)
+output:![image](https://github.com/user-attachments/assets/0119af9b-0a05-4cd8-8135-b5514caf0dec)
+
+
 
 
 Testbench for Swapping Three Numbers:
 
-module tb_swap_three_numbers;
-    reg [7:0] a, b, c;    
-    wire [7:0] a_out, b_out, c_out;
-    swap_three_numbers dut (
-        .a(a), 
-        .b(b), 
-        .c(c),
-        .a_out(a_out), 
-        .b_out(b_out), 
+// swap_three_numbers_tb.v
+`timescale 1ns / 1ps
+
+module swap_three_numbers_tb;
+
+    // Inputs
+    reg [7:0] a;
+    reg [7:0] b;
+    reg [7:0] c;
+
+    // Outputs
+    wire [7:0] a_out;
+    wire [7:0] b_out;
+    wire [7:0] c_out;
+
+    // Instantiate the Unit Under Test (UUT)
+    swap_three_numbers uut (
+        .a_in(a),
+        .b_in(b),
+        .c_in(c),
+        .a_out(a_out),
+        .b_out(b_out),
         .c_out(c_out)
     );
-     initial begin
-        a = 8'd10;
-        b = 8'd20;
-        c = 8'd30;
+
+    // Test procedure
+    initial begin
+        // Initialize inputs
+        a = 8'd10; // Assign 10 to a
+        b = 8'd20; // Assign 20 to b
+        c = 8'd30; // Assign 30 to c
+
+        // Wait for 10 ns to observe swap
         #10;
-        $display("First swap completed.");
-        a = 8'd50;
-        b = 8'd60;
-        c = 8'd70;
+
+        // Display results
+        $display("Before Swap: a = %d, b = %d, c = %d", a, b, c);
         #10;
-        $finish;
+        $display("After Swap: a = %d, b = %d, c = %d", a_out, b_out, c_out);
+        
+        // Stop the simulation
+        #10 $stop;
     end
-
 endmodule
-output:![image](https://github.com/user-attachments/assets/0dc9cb11-0281-4ab2-b67a-56afee56ef0d)
-
-
+   
+output:![image](https://github.com/user-attachments/assets/848a8d84-54dc-4454-be1f-d1b8cfd70754)
 
 
 Conclusion
